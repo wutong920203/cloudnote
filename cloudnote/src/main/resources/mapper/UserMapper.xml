@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- 
+	namespace:命名空间，用来区分同名的sql。
+	id:在同一个文件里面唯一。
+	parameterType:参数类型。
+	resultType:返回的结果类型。
+	#{ename}:ename是Emp的属性,
+	mybatis会利用反射机制读取emp对象的属性值。
+	
+	注意：如果使用Mapper映射器，namespace必须
+	等于Mapper接口的完整的名称。
+ -->
+<mapper namespace="com.tedu.cloudnote.dao.UserDAO">
+	
+	<select id="findByName" parameterType="String" resultType="com.tedu.cloudnote.entity.Admin">
+		SELECT cn_user_id,cn_user_name,cn_user_password FROM cn_user 
+		WHERE cn_user_name = #{code}
+	</select>
+	
+	<select id="findById" parameterType="String" resultType="com.tedu.cloudnote.entity.Admin">
+		SELECT cn_user_id,cn_user_name,cn_user_password 
+		FROM cn_user  
+		WHERE cn_user_id = #{id}
+	</select>
+	
+	<update id="changePwd" parameterType="com.tedu.cloudnote.entity.Admin">
+		UPDATE cn_user 
+		SET cn_user_password = #{cn_user_password}  
+		WHERE cn_user_id = #{cn_user_id} 
+	</update>
+	
+<!-- 	注册新用户 -->
+	<update id="save" parameterType="com.tedu.cloudnote.entity.Admin" >
+		INSERT INTO cn_user 
+		VALUES 
+		(#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_token},#{cn_user_nick})
+	</update>
+	
+</mapper>
+
+
+
+
+

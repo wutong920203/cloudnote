@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tedu.cloudnote.dao.ActivityDAO">
+	
+	<select id="findById" parameterType="String" resultType="com.tedu.cloudnote.entity.ActNote">
+		SELECT * FROM cn_note_activity 
+		WHERE cn_note_activity_id = #{actNoteId} 
+	</select>
+	
+	<select id="findAll" resultType="com.tedu.cloudnote.entity.Activity">
+		SELECT * FROM cn_activity 
+	</select>
+	
+	<select id="findNotes" parameterType="String" resultType="com.tedu.cloudnote.entity.ActNote">
+		SELECT * FROM cn_note_activity 
+		WHERE cn_activity_id = #{actId} 
+	</select>
+	
+	<select id="getNote" parameterType="String" resultType="com.tedu.cloudnote.entity.ActNote">
+		SELECT * FROM cn_note_activity 
+<!-- 		WHERE cn_note_id = #{noteId}  -->
+		WHERE cn_note_activity_id = #{noteActId} 
+	</select>
+	
+	<insert id="addNew" parameterType="com.tedu.cloudnote.entity.ActNote">
+		INSERT INTO cn_note_activity 
+			(cn_note_activity_id,cn_activity_id,cn_note_id,cn_note_activity_up,
+			cn_note_activity_down,cn_note_activity_title,cn_note_activity_body)
+		VALUES 
+			(#{cn_note_activity_id},#{cn_activity_id},#{cn_note_id},'0','0',
+			#{cn_note_activity_title},#{cn_note_activity_body}) 
+	</insert>
+	
+</mapper>
+
+
+
+
+

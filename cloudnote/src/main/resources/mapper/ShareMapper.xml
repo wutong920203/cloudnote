@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.tedu.cloudnote.dao.ShareDAO">
+	
+	<insert id="save" parameterType="com.tedu.cloudnote.entity.Share">
+		INSERT INTO cn_share 
+		(cn_share_id,cn_share_title,cn_share_body,cn_note_id) 
+		VALUES (#{cn_share_id},#{cn_share_title},#{cn_share_body},#{cn_note_id}) 
+	</insert>
+	
+	<select id="findLikeTitle" parameterType="map" resultType="com.tedu.cloudnote.entity.Share">
+		SELECT * FROM cn_share 
+		WHERE cn_share_title LIKE #{keyword} 
+		LIMIT #{begin},5 
+		<!-- 意思是从0开始，取5条 -->
+	</select>
+	
+	<select id="findById" parameterType="String" resultType="com.tedu.cloudnote.entity.Share">
+		SELECT * FROM cn_share 
+		WHERE cn_share_id = #{cn_share_id} 
+	</select>
+	
+</mapper>
+
+
+
+
+
